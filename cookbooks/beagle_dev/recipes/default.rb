@@ -18,17 +18,23 @@
 #
 
 include_recipe 'distcc'
+include_recipe 'apt'
 
 apt_repository 'linaro' do
   uri          'http://ppa.launchpad.net/linaro-foundations/cross-build-tools/ubuntu'
   distribution node['lsb']['codename']
   components   ['main']
   keyserver    'keyserver.ubuntu.com'
-  key          'C300EE8C'
+  key          '099F4315'
+  action       :add
+  notifies     :run, "execute[apt-get update]", :immediately
 end
 
 package "xbuilder"
 
+package "python-software-properties"
+
+#TODO: Make more flexible
 execute "xbuild-chroot-setup precise /srv/chroots/precise-cross"
 
 #%{sbuild schroot qemu-user-static}.each do |p|
