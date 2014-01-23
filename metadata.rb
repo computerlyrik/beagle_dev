@@ -1,4 +1,4 @@
-name             'beagle_dev'
+name             'beagle_vm'
 maintainer       'computerlyrik'
 maintainer_email 'chef-cookbooks@computerlyrik.de'
 license          'Apache 2.0'
