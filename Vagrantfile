@@ -90,8 +90,9 @@ config.vm.hostname = "beagle-dev"
   # some recipes and/or roles.
   #
 
-config.vm.network :private_network, :ip => "192.168.178.22"
-config.vm.network :forwarded_port, host: 4567, guest: 80
+#config.vm.network :private_network, :ip => "192.168.178.22"
+#config.vm.network :forwarded_port, host: 4567, guest: 80
+#config.vm.network :private_network
 
 config.vm.provision :chef_solo do |chef|
   chef.cookbooks_path = "cookbooks"

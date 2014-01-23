@@ -27,6 +27,12 @@ apt_repository 'linaro' do
   key          'C300EE8C'
 end
 
+package "xbuilder"
+
+execute "xbuild-chroot-setup precise /srv/chroots/precise-cross"
+
+```
 %{sbuild schroot qemu-user-static}.each do |p|
   package p
 end
+```
