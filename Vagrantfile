@@ -96,8 +96,11 @@ config.vm.provision :chef_solo do |chef|
   chef.data_bags_path = "../my-recipes/data_bags"
   chef.add_recipe "mysql"
   chef.add_role "web"
-  chef.json = { :mysql_password => "foo" }
-  chef.run_list = []
+  chef.json = { :mysql_password => "foo",
+                :distcc => { 
+                :allowed_networks = "192.168.178.0/24" 
+              }
+  chef.run_list = ['beagle_dev::default']
 end
 
   # Enable provisioning with chef server, specifying the chef server URL,
