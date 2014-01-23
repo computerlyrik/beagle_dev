@@ -100,7 +100,7 @@ config.vm.provision :chef_solo do |chef|
 #  chef.add_role "web"
   chef.json = { :mysql_password => "foo",
                 :distcc => { 
-                  :allowed_networks => "192.168.178.0/24" 
+                :allowed_networks => "192.168.178.0/24" 
                  }
               } 
   chef.run_list = ['beagle_dev::default']
