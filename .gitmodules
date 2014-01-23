@@ -1,0 +1,3 @@
+[submodule "cookbooks/distcc"]
+	path = cookbooks/distcc
+	url = https://github.com/computerlyrik/chef-distcc.git
