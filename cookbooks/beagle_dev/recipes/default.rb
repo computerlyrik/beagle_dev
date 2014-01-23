@@ -31,8 +31,6 @@ package "xbuilder"
 
 execute "xbuild-chroot-setup precise /srv/chroots/precise-cross"
 
-```
-%{sbuild schroot qemu-user-static}.each do |p|
-  package p
-end
-```
+#%{sbuild schroot qemu-user-static}.each do |p|
+#  package p
+#end
