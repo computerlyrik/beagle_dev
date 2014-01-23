@@ -17,9 +17,8 @@ config.vm.hostname = "beagle-dev"
   config.vm.box = "Ubunti precise 64"
   config.vm.box_url = "http://files.vagrantup.com/precise64.box"
 
-  config.vm.network :private_network
 
-  config.bershelf.enabled = true
+#  config.berkshelf.enabled = true
   # The url from where the 'config.vm.box' box will be fetched if it
   # doesn't already exist on the user's system.
   # config.vm.box_url = "http://domain.com/path/to/above.box"
@@ -90,16 +89,19 @@ config.vm.hostname = "beagle-dev"
   # path, and data_bags path (all relative to this Vagrantfile), and adding
   # some recipes and/or roles.
   #
+
+config.vm.network :private_network, :ip => "192.168.178.22"
+config.vm.network :forwarded_port, host: 4567, guest: 80
+
 config.vm.provision :chef_solo do |chef|
-  chef.cookbooks_path = "../my-recipes/cookbooks"
-  chef.roles_path = "../my-recipes/roles"
-  chef.data_bags_path = "../my-recipes/data_bags"
-  chef.add_recipe "mysql"
-  chef.add_role "web"
+  chef.cookbooks_path = "cookbooks"
+#  chef.add_recipe "mysql"
+#  chef.add_role "web"
   chef.json = { :mysql_password => "foo",
                 :distcc => { 
-                :allowed_networks = "192.168.178.0/24" 
-              }
+                  :allowed_networks => "192.168.178.0/24" 
+                 }
+              } 
   chef.run_list = ['beagle_dev::default']
 end
 
