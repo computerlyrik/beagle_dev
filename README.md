@@ -12,7 +12,7 @@ vagrant berkshelf plugin - ```vagrant plugin install vagrant-berkshelf```
 Howto run
 ---------
 
-cd beagle_vm
+```cd beagle_vm```
 
 Create and start VM ```vagrant up```
 Log into your vagrant VM ```vagrant ssh```
