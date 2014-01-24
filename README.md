@@ -14,6 +14,7 @@ Howto run
 
 ```cd beagle_vm```
 
+Initialize submodules ```git submodule init``` add ```git submodule update```
 Create and start VM ```vagrant up```
 Log into your vagrant VM ```vagrant ssh```
 
