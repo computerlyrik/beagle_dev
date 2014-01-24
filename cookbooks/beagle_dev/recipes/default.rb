@@ -20,8 +20,8 @@
 include_recipe 'distcc'
 include_recipe 'apt'
 
-apt_repository 'linaro' do
-  uri          'http://ppa.launchpad.net/linaro-foundations/cross-build-tools/ubuntu'
+apt_repository "linaro-cross-build-tool" do
+  uri          "http://ppa.launchpad.net/linaro-foundations/cross-build-tools/ubuntu"
   distribution node['lsb']['codename']
   components   ['main']
   keyserver    'keyserver.ubuntu.com'
@@ -30,13 +30,31 @@ apt_repository 'linaro' do
   notifies     :run, "execute[apt-get update]", :immediately
 end
 
+%w{toolchain tools}.each do |repo|
+
+  apt_repository "linaro-#{repo}" do
+    uri          "http://ppa.launchpad.net/linaro-maintainers/#{repo}/ubuntu"
+    distribution node['lsb']['codename']
+    components   ['main']
+    keyserver    'keyserver.ubuntu.com'
+    key          '7BE1F97B'
+    action       :add
+    notifies     :run, "execute[apt-get update]", :immediately
+  end
+
+end
+
+# DEPENDENCIES  for/and xbuilder
+package "xapt" 
+package "python-software-properties"
 package "xbuilder"
 
-package "python-software-properties"
+
+# INSTALL ARM compatible libraries
+%w{binutils-arm-linux-gnueabihf gcc-arm-linux-gnueabihf g++-arm-linux-gnueabihf}.each do |p|
+  package p
+end
 
 #TODO: Make more flexible
-execute "xbuild-chroot-setup precise /srv/chroots/precise-cross"
+execute "echo 'Y' | xbuild-chroot-setup precise /srv/chroots/precise-cross"
 
-#%{sbuild schroot qemu-user-static}.each do |p|
-#  package p
-#end
